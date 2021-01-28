@@ -40,6 +40,20 @@ async def on_message(message):
         db!say [Text]: Makes the bot say something, replace [Text] with whatever you would like
         db!despacito: despacito
         db!help: ...```''')
+        if message.content.startswith('db!insult'):
+            random = random.randint (1,10)
+            if random = 1 :
+                await message.channel.send('ORDINARILY PEOPLE LIVE AND LEARN. YOU JUST LIVE.')
+            elif random = 2 :
+                await message.channel.send('YOU\'RE NOT FUNNY, BUT YOUR LIFE, NOW THAT\'S A JOKE.')
+            elif random = 3 :
+                await message.channel.send('YOU\'RE AS USELESS AS A COMPUTER WITHOUT INTERNET.')
+            elif random = 4 :
+                await message.channel.send('YOUR ASININE SIMIAN COUNTENANCE ALLUDES THAT YOUR FETID STENCH HAS ANULLED THE ANTHROPOID APE SPECIES DIVERSITY.')
+            elif random = 5 :
+                await message.channel.send('YOU\'RE NOT PRETTY ENOUGH TO BE THIS STUPID.')
+            elif random = 6 :
+                await message.channel.send('YOU\'RE SO STUPID, IT TAKES YOU AN HOUR TO COOK MINUTE RICE.')
 
 # Bot Token/Run
 client.run("ODA0MTUwMzYzNjAyNDE5Nzgy.YBIJYw.LIJrEBtPKgqTP1IwSEsH4bgYt5s")
