@@ -9,17 +9,19 @@ from discord.ext.commands import bot
 from time import sleep
 from discord import FFmpegPCMAudio
 from discord.utils import get
+from random import choice
 
 #Reset Variables
-Insult = 0 #Insult/Compliment Variable
-Lottery = 0 #Not Used Yet
-coin = 0 #Coin Flip Variable
-members = "test" #Not Used Yet
-
+Insult = 0
+Counter = '0'
+members = "test"
+yesNo = 0
+timer = 0
 
 
 #creating a new discord client
-client=discord.Client()
+intents = discord.Intents.all()
+client=discord.Client(intents=intents)
 bot = commands.Bot(command_prefix='db!')
 
 #methods waiting for the event
@@ -41,6 +43,7 @@ async def on_ready():
 async def on_message(message):
     Insult = 0
     coin = 0
+    Choice = 0
     sleep(0.3)
     Insult = (random.randint(1,10))
     coin = (random.randint(1,3))
@@ -69,7 +72,11 @@ async def on_message(message):
         db!insult: Take A Random Guess
         db!compliment: A bunch of backhanded compliments
         db!FlipACoin: Flips A Coin
-        db!doing: Changes the bot's status```''')
+        db!doing: Changes the bot's status
+        db!deleteserver: Power Manifested
+        db!roulette: Pings a random User
+        db!colors: Lists The Colors Available
+        db!Color: Sets Your Color (RUN db!Color Clear FIRST)```''')
     #Insult Command
     if message.content.startswith('db!insult'):
         if Insult == 1 :
@@ -114,7 +121,6 @@ async def on_message(message):
             await message.channel.send('Some dudes hope you start a band so they can start a cover band of that band.')
         if Insult == 10 :
             await message.channel.send('Kids think you are the \“cool old person\”.')
-    #Coin Flip Command
     if message.content.startswith('db!FlipACoin'):
         if coin == 1 :
             await message.channel.send('It Was Heads')
@@ -122,16 +128,104 @@ async def on_message(message):
             await message.channel.send('It Was Tails')
         elif coin == 3 :
             await message.channel.send('The Coin Landed On Its Side')
-    #Terminate Command
     if message.content.startswith('GG!EnD01230'):
         await message.channel.send('Goodbye')
         await client.change_presence(status=discord.Status.invisible)
         sleep(1)
         await client.close()
-    #Status Command
     if message.content.startswith('db!doing'):
         await client.change_presence(status=discord.Status.online, activity=discord.Game(message.content.replace('db!doing','')))
         await message.channel.send("Doing ur mom")
+    if message.content.startswith('db!deleteserver'):
+        print ('A Random Sever Has Been Deleted')
+        await message.channel.send(message.author.mention + " Has Deleted A Random Server")
+        await message.channel.send('I have used my power to delete a server. What server? I have no clue.')
+    if message.content.startswith('db!roulette'):
+        print(message.channel.members)
+        user = random.choice(message.channel.members)
+        await message.channel.send(': %s is dead' % user.mention)
+    if message.content.startswith('db!colors'):
+        await message.channel.send('''
+        &
+        ```Please Run db!Color Clear to clear your colors before selecting a new color.```
+        >>> Available Colors:
+        Lime
+        Yellow
+        Aqua
+        Blue
+        Bright Orange
+        Light Green
+        Black
+        Navy
+        Salmon
+        Pink
+        Dark Red
+        Brown
+        Purple''')
+    if message.content.startswith('db!Color'):
+        user = message.author
+        print(user)
+        color = message.content.replace('db!Color ','')
+        print(color)
+        sleep(0.3)
+        if color == 'Lime':
+            role = get(user.guild.roles, name = 'Lime')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Lime Role')
+        elif color == 'Yellow':
+            role = get(user.guild.roles, name = 'Yellow')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Yellow Role')
+        elif color == "Aqua":
+            role = get(user.guild.roles, name = 'Aqua')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Aqua Role')
+        elif color == "Blue":
+            role = get(user.guild.roles, name = 'Blue')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Blue Role')
+        elif color == "Bright Orange":
+            role = get(user.guild.roles, name = 'Bright Orange')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Bright Orange Role')
+        elif color == "Light Green":
+            role = get(user.guild.roles, name = 'Light Green')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Light Green Role')
+        elif color == "Black":
+            role = get(user.guild.roles, name = 'Black')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Black Role')
+        elif color == "Navy":
+            role = get(user.guild.roles, name = 'Navy')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Navy Role')
+        elif color == "Salmon":
+            role = get(user.guild.roles, name = 'Salmon')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Salmon Role')
+        elif color == "Pink":
+            role = get(user.guild.roles, name = 'Pink')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Pink Role')
+        elif color == "Dark Red":
+            role = get(user.guild.roles, name = 'Dark Red')
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Dark Red Role')
+        elif color == "Brown":
+            role = get(user.guild.roles, name = "Brown")
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Brown Role')
+        elif color == "Purple":
+            role = get(user.guild.roles, name = "Purple")
+            await user.add_roles(role)
+            await message.channel.send('Gave '+ (message.author.mention) + ' Purple Role')
+        elif color == "Clear":
+            removeColors = ('Lime', 'Yellow', 'Aqua', 'Blue', 'Bright Orange', 'Light Green', 'Black', 'Navy', 'Salmon', 'Pink', 'Dark Red', 'Brown', 'Purple')
+            role = tuple(get(user.guild.roles, name = n)for n in removeColors)
+            await user.remove_roles(*role)
+            print('Reset Colors')
+            await message.channel.send('Reset Color')
 #______________________________________________________________________________________________________________________________________________________________________________
   # Bot Token/Run
 client.run("*************")
