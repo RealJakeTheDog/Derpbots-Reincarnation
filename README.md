@@ -1,7 +1,9 @@
 # Derpbot
 
 Remade And Revamped Version of Derpbot
+
 REVAMPED YET AGAIN
+
 added cogs and more optimised commands using discord.ext commands
 
 Now Fully Supported
