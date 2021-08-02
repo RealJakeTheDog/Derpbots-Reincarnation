@@ -40,13 +40,11 @@ class InsultPlus(commands.Cog, name='Fun'):
     async def insult(self, ctx): #Insult command, picks an insult from the list of insults and sends it.
         choice = random.choice(Insults)
         await ctx.send(choice)
-        print(f'Insulted {ctx.message.author}')
 
     @commands.command(name='Compliment', breif='A bunch of backhanded compliments.')
     async def compliment(self, ctx): #Complimentcommand, picks a compliment from the list of compliments and sends it.
         choice = random.choice(Insults)
         await ctx.send(choice)
-        print(f'Complimented {ctx.message.author}')
 
 def setup(bot):
     bot.add_cog(InsultPlus(bot))

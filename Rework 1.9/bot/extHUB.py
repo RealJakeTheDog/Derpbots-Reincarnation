@@ -14,7 +14,6 @@ Defualt_Extensions=[ #Cogs to load on launch
     'mod.User_Commands',
     'fun.Basic_Text_Commands',
     'fun.InsultPlus',
-    'useful.Music',
     'admin.Admin',
     'lfg.VC'
 ]
@@ -24,7 +23,7 @@ class extensionclass(commands.Cog, name='Extensions'):
         self.bot = bot
     @commands.command()
     async def ReloadAll(self, ctx):
-        for extension in bot.cogs():
+        for extension in self.bot.cogs():
             self.bot.reload_extension(extension)
             print(f'Loaded {extension}')
 

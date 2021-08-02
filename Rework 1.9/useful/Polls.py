@@ -13,9 +13,7 @@ class Polls(commands.Cog):
         print('test')
         if len(args) == 3:
             user = ctx.message.author
-            print(user)
             Poll = args[0]
-            print(Poll)
             Channel = self.bot.get_channel(int(args[1]))
             embed = discord.Embed(title='New Poll', description=(Poll))
             embed.add_field(name='How To Vote:', value='Please react with :white_check_mark: for yes or :negative_squared_cross_mark: for no')
@@ -24,6 +22,7 @@ class Polls(commands.Cog):
             message = await Channel.send(embed=embed)
             await message.add_reaction('\U00002705')
             await message.add_reaction('\U0000274e')
+            await ctx.message.delete()
             await asyncio.sleep(int(args[2]))
             Poll = args[0]
             print(Poll)

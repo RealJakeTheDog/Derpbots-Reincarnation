@@ -3,6 +3,8 @@ import discord.ext
 from discord.ext import commands
 from discord.ext.commands import Bot, has_permissions, CheckFailure
 import asyncio
+import sys
+import traceback
 
 class ErrorHandler(commands.Cog):
     def __init__(self, bot):
@@ -16,8 +18,8 @@ class ErrorHandler(commands.Cog):
         if cog:
             if cog._get_overridden_method(cog.cog_command_error) is not None:
                 return
-        ignored=(commands.CommandNotFound, ) #Ingores if there is no command available
-        error = getattr(error, 'original, error')
+        ignored=(commands.CommandNotFound, asyncio.exceptions.TimeoutError, asyncio.exceptions.CancelledError) #Ingores if there is no command available
+        error = getattr(error, 'original', error)
         if isinstance(error, ignored):
             return
         if isinstance(error, commands.DisabledCommand): #Checks if the command has been disabled
@@ -28,11 +30,16 @@ class ErrorHandler(commands.Cog):
             except discord.HTTPException:
                 pass
         elif isinstance(error, commands.BadArgument): #Checks if Arguments are missing
-            if ctx.command.qualified_name= 'tag list':
+            if ctx.command.qualified_name== 'tag list':
                 await ctx.send('I could not find that member. Please try again.')
         elif isinstance(error, commands.MissingPermissions): #Checks if user is missing permissions
                 await ctx.send('You don\'t have permissions to do that!')
+        elif isinstance(error, commands.CommandOnCooldown):
+            await ctx.send('This command is currently on cooldown!')
         else: #If error is none of the above
             print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
             traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
             await ctx.send(f'```Unable to find reason for error. Original Error: {error}```')
+
+def setup(bot):
+    bot.add_cog(ErrorHandler(bot))
